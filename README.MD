@@ -128,6 +128,10 @@ The default invocation. It randomizes a unit's z-offset from its defined `Layer_
 
 Overload. You may set `spawns_fighters` to `true` if a unit has the `SPAWN_SQUADRON` space behaviour to prevent fighters spawning during the hyerspace phase. Calling the function with `spawns_fighters` set to `false` is equivalent to calling the function without the parameter.
 
+## Known Issues
+
+* AI may ignore popcap limits - the issue is under investigation.
+
 ## Changelog
 
 ### 2021-01-17: Intial release.
