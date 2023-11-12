@@ -1,9 +1,6 @@
 ---@class Configuration
 Configuration = {
-    ---@type string
-    ---The neutral faction alias in capital letters.
-    NEUTRAL_PLAYER = "NEUTRAL",
-    ---@type table[]
+    ---@type table<string,function>[]
     ---A map of anonymous objects that define the mapping between the category mask and (a subset of) bones of the `LAYER_DUMMY_TYPE`.
     CATEGORY_MAP = {
         {
