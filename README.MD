@@ -39,13 +39,6 @@ The script uses a unit's category flags to determine its height range, as those 
 
 The configuration module (`scripts/library/eaw-layerz/configuration.lua`) is the only file you should ever have to adjust for your own mod. Any modification to the module beyond that is not officially supported and performed at your own risk.
 
-#### The `NEUTRAL_PLAYER` Option
-
-This option is used to quickly change the ownership of the unit during the initial hyperjump to prevent issues with the AI. The faction name contained has to be set to the name of the neutral faction in capital letters, defaulting to `"NEUTRAL"`.
-
-Unless your mod changes the name of the default faction you do not have to edit this option.    
-**PS** If your mod changes the name of this faction, you may want to rethink that edit.
-
 #### The `CATEGORY_MAP` List
 
 This list holds a range of anonymous objects describing a `GameObject` category and its associated offset range:
