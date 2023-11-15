@@ -130,8 +130,12 @@ Overload. You may set `spawns_fighters` to `true` if a unit has the `SPAWN_SQUAD
 
 ## Known Issues
 
-* AI may ignore popcap limits - the issue is under investigation.
+2023-11-12: None
 
 ## Changelog
 
-### 2021-01-17: Intial release.
+### 2023-11-12 - v1.0.1
+* [#1] Fixes an issue where the AI would ignore pop cap limits with the module enabled.
+
+### 2021-01-17 - v1.0.0
+* Intial release.

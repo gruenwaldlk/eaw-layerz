@@ -3,8 +3,6 @@
 LayerManager = {
     ---@type Configuration
     CONFIG = require("eaw-layerz/configuration"),
-    ---@type PlayerObject
-    m_actual_owner = nil,
     ---@private
     ---@param self LayerManager
     ---@param game_object GameObject
@@ -19,24 +17,11 @@ LayerManager = {
     ---@param spawns_fighters boolean
     ---Completely disables a given `GameObject`.
     __disable_game_object = function(self, game_object, spawns_fighters)
-        if not game_object.Get_Owner().Is_Human() then
-            self:__disable_game_object_for_ai_player(game_object)
-        end
         local l_spawns_fighters = spawns_fighters or false
         if l_spawns_fighters then game_object.Set_Garrison_Spawn(false) end
         game_object.Make_Invulnerable(true)
         game_object.Set_Selectable(false)
         game_object.Prevent_All_Fire(true)
-    end,
-    ---@private
-    ---@param self LayerManager
-    ---@param game_object GameObject
-    ---Performs additional actions required for AI-owned `GameObjects`so they get added (back) to the `FreeStore` reliably.
-    __disable_game_object_for_ai_player = function(self, game_object)
-        game_object.Prevent_AI_Usage(true)
-        self.m_actual_owner = game_object.Get_Owner()
-        game_object.Change_Owner(Find_Player(
-                                     self.CONFIG.NEUTRAL_PLAYER or "NEUTRAL"))
     end,
     ---@private
     ---@param self LayerManager
@@ -49,18 +34,8 @@ LayerManager = {
         game_object.Make_Invulnerable(false)
         game_object.Set_Selectable(true)
         game_object.Prevent_All_Fire(false)
-        if not game_object.Get_Owner().Is_Human() then
-            self:__enable_game_object_for_ai_player(game_object)
-        end
-        if l_spawns_fighters then game_object.Set_Garrison_Spawn(true) end
-    end,
-    ---@private
-    ---@param self LayerManager
-    ---@param game_object GameObject
-    ---Performs additional actions required for AI-owned `GameObjects`so they get added (back) to the `FreeStore` reliably.
-    __enable_game_object_for_ai_player = function(self, game_object)
-        game_object.Change_Owner(self.m_actual_owner)
         game_object.Prevent_AI_Usage(false)
+        if l_spawns_fighters then game_object.Set_Garrison_Spawn(true) end
     end,
     ---@private
     ---@param self LayerManager
@@ -70,8 +45,7 @@ LayerManager = {
         local l_min, l_max = self:__resolve_layer(game_object)
         if l_min == l_max then return end
         local l_x0, l_x1, l_x2 = l_position.Get_XYZ()
-        l_position =
-            Create_Position(l_x0, l_x1, l_x2 + GameRandom(l_min, l_max))
+        l_position = Create_Position(l_x0, l_x1, l_x2 + GameRandom(l_min, l_max))
         game_object.Teleport(l_position)
     end,
     ---@private
